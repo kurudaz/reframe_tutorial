@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="跟著三個步驟學會 Reframe（重構）：進入照片編輯、開啟重構、調整視角並儲存，附動態操作示範。">
+  <meta name="theme-color" content="#00796e">
+  <title>Reframe（重構）簡易教學</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2300796e'/%3E%3Cpath d='M7 13V7h6m6 0h6v6m0 6v6h-6m-6 0H7v-6' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+  <style>
+    :root{color-scheme:light;--ink:#233437;--muted:#617176;--accent:#00796e;--line:#dbe4e3;--pale:#eef6f4}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;background:#fff;color:var(--ink);font:1rem/1.8 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif}
+    a{color:var(--accent);text-underline-offset:4px}button{font:inherit}a:focus-visible,button:focus-visible{outline:3px solid #b96b17;outline-offset:5px}
+    .skip{position:absolute;left:20px;top:-80px;background:#fff;padding:10px;z-index:9}.skip:focus{top:10px}
+    .wrap{width:min(100% - 48px,1000px);margin:auto}
+    header{padding:54px 0 30px}header .eyebrow{font-size:.875rem;color:var(--accent);letter-spacing:.1em;font-weight:600;margin:0 0 8px}
+    h1{font-size:clamp(1.8rem,4.5vw,2.65rem);line-height:1.4;letter-spacing:-.035em;margin:0 0 12px;font-weight:700}
+    header p{margin:0;color:var(--muted)}
+    nav{position:sticky;top:0;z-index:3;background:rgba(255,255,255,.97);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    nav .wrap{display:flex;gap:30px;align-items:center;min-height:60px;flex-wrap:wrap;padding-block:10px}
+    nav a{font-size:.9375rem;text-decoration:none;font-weight:600}nav a:hover{text-decoration:underline}
+    section{padding:42px 0 38px;border-bottom:1px solid var(--line)}
+    .step-heading{display:flex;gap:16px;align-items:baseline;margin-bottom:10px}.number{font-size:1rem;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+    h2{margin:0;font-size:clamp(1.35rem,3.5vw,1.75rem);line-height:1.5}section>p{margin:0 0 22px}strong{font-weight:650}
+    figure{margin:0}.screenshot{display:block;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#f2f4f4}
+    img{display:block;max-width:100%;height:auto;width:100%}figcaption{font-size:.875rem;color:var(--muted);margin-top:8px}
+    .settings{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0}
+    .settings div{padding-left:14px;border-left:2px solid #8fbcb4}.settings dt{font-weight:650}.settings dd{margin:0;color:var(--muted);font-size:.9375rem}
+    .save{padding:18px 22px;background:var(--pale);border-left:3px solid var(--accent);margin:24px 0 0}.save p{margin:4px 0 0}
+    #demos{padding-bottom:12px}#demos>p{color:var(--muted);margin-top:10px}
+    .demo{margin:26px 0 40px;max-width:800px}.demo-top{display:flex;gap:16px;align-items:center;justify-content:space-between;margin-bottom:12px}
+    h3{font-size:1.125rem;font-weight:650;margin:0}.toggle{display:none;border:1px solid var(--line);background:#fff;color:var(--accent);padding:7px 16px;border-radius:6px;cursor:pointer;flex-shrink:0;font-size:.9375rem;min-height:44px}.toggle:hover{background:var(--pale)}
+    .js .toggle{display:inline-block}.demo img{border-radius:8px;border:1px solid var(--line);background:#edf0ef}
+    footer{padding:26px 0 36px;color:var(--muted);font-size:.875rem}footer p{margin:0}footer a{float:right}
+    @media(max-width:600px){.wrap{width:calc(100% - 32px)}header{padding:30px 0 24px}nav .wrap{gap:10px 22px;min-height:58px}nav a{font-size:.875rem}section{padding:30px 0}.settings{grid-template-columns:repeat(2,1fr);gap:18px}.step-heading{gap:10px}.save{padding:16px}.demo-top{gap:10px}h3{font-size:1rem}footer a{float:none;display:block;margin-top:10px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+    @media print{nav,.toggle,footer a{display:none!important}header{padding:10px 0}section{break-inside:avoid}.wrap{width:100%}#demos{display:none}body{font-size:11pt}}
+  </style>
+</head>
+<body id="top">
+  <a class="skip" href="#step-1">跳到教學內容</a>
+  <header class="wrap">
+    <p class="eyebrow">照片編輯 · 操作教學</p>
+    <h1>Reframe（重構）簡易教學</h1>
+    <p>從開啟工具到儲存結果，跟著三個步驟調整照片視角。</p>
+  </header>
+  <nav aria-label="教學章節"><div class="wrap">
+    <a href="#step-1">01 進入編輯</a><a href="#step-2">02 開啟重構</a><a href="#step-3">03 調整與儲存</a><a href="#demos">動態示範</a>
+  </div></nav>
+  <main class="wrap">
+    <section id="step-1" aria-labelledby="title-1">
+      <div class="step-heading"><span class="number">01</span><h2 id="title-1">選好照片，進入編輯</h2></div>
+      <p>在「照片」中開啟想調整的圖片，點右上角的<strong>「編輯」</strong>（紅圈 1）。</p>
+      <figure><a class="screenshot" href="assets/step-1.jpg" target="_blank" rel="noopener" aria-label="在新分頁查看步驟 1 原尺寸截圖"><img src="assets/step-1.jpg" width="2122" height="1242" alt="照片瀏覽畫面，右上角的編輯按鈕標有紅圈 1。" fetchpriority="high"></a><figcaption>點選圖片可查看原尺寸。</figcaption></figure>
+    </section>
+    <section id="step-2" aria-labelledby="title-2">
+      <div class="step-heading"><span class="number">02</span><h2 id="title-2">從「工具」開啟「重構」</h2></div>
+      <p>先點上方<strong>「工具」</strong>（紅圈 2），再點右側<strong>「重構」</strong>（紅圈 3）。</p>
+      <figure><a class="screenshot" href="assets/step-2.jpg" target="_blank" rel="noopener" aria-label="在新分頁查看步驟 2 原尺寸截圖"><img src="assets/step-2.jpg" width="2132" height="1236" alt="編輯畫面，上方工具分頁與右側重構按鈕分別以紅圈 2、3 標示。" loading="lazy"></a></figure>
+    </section>
+    <section id="step-3" aria-labelledby="title-3">
+      <div class="step-heading"><span class="number">03</span><h2 id="title-3">調整視角，確認後儲存</h2></div>
+      <p><strong>直接拖曳照片</strong>調整視角；需要微調時，再使用右側滑桿。</p>
+      <figure><a class="screenshot" href="assets/step-3.jpg" target="_blank" rel="noopener" aria-label="在新分頁查看步驟 3 原尺寸截圖"><img src="assets/step-3.jpg" width="2126" height="1232" alt="重構畫面，照片可拖移，右側提供旋轉、移動、校正、縮放四種調整。" loading="lazy"></a></figure>
+      <dl class="settings"><div><dt>旋轉</dt><dd>調整角度</dd></div><div><dt>移動</dt><dd>調整位置</dd></div><div><dt>校正</dt><dd>修正傾斜</dd></div><div><dt>縮放</dt><dd>調整大小</dd></div></dl>
+      <aside class="save"><strong>最後記得儲存</strong><p>調整好後按右下「重構」，等待處理完成，再按右上「儲存所作更動」。</p></aside>
+    </section>
+    <section id="demos" aria-labelledby="title-demos">
+      <h2 id="title-demos">動態操作示範</h2>
+      <p>觀看實際調整過程。動畫會循環播放，也可以暫停後對照畫面。</p>
+      <figure class="demo"><div class="demo-top"><h3>示範 1 · 調整視角</h3><button class="toggle" type="button" aria-controls="demo-1" aria-label="暫停示範 1 動畫">暫停動畫</button></div><img id="demo-1" src="assets/demo-1.gif" data-still="assets/demo-1-still.png" width="800" height="461" loading="lazy" alt="重構功能的視角調整動態示範 1。"></figure>
+      <figure class="demo"><div class="demo-top"><h3>示範 2 · 持續微調</h3><button class="toggle" type="button" aria-controls="demo-2" aria-label="暫停示範 2 動畫">暫停動畫</button></div><img id="demo-2" src="assets/demo-2.gif" data-still="assets/demo-2-still.png" width="800" height="461" loading="lazy" alt="重構功能的視角微調動態示範 2。"></figure>
+      <figure class="demo"><div class="demo-top"><h3>示範 3 · 套用重構結果</h3><button class="toggle" type="button" aria-controls="demo-3" aria-label="暫停示範 3 動畫">暫停動畫</button></div><img id="demo-3" src="assets/demo-3.gif" data-still="assets/demo-3-still.png" width="800" height="461" loading="lazy" alt="調整照片後套用重構，等待處理並準備儲存的動態示範。"></figure>
+    </section>
+  </main>
+  <footer class="wrap"><p>依提供的「照片」介面示範。<a href="#top">回到頂端 ↑</a></p></footer>
+  <script>
+    document.documentElement.classList.add('js');
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    document.querySelectorAll('.demo').forEach((figure, index) => {
+      const img = figure.querySelector('img');
+      const button = figure.querySelector('button');
+      const animation = img.getAttribute('src');
+      let playing = !reduceMotion.matches;
+      let frozen;
+      const update = () => {
+        button.textContent = playing ? '暫停動畫' : '播放動畫';
+        button.setAttribute('aria-label', `${playing ? '暫停' : '播放'}示範 ${index + 1} 動畫`);
+      };
+      if (!playing) img.src = img.dataset.still;
+      update();
+      button.addEventListener('click', () => {
+        if (playing) {
+          // A canvas holds the visible frame without re-encoding the GIF.
+          frozen = document.createElement('canvas');
+          frozen.width = img.naturalWidth || 800;
+          frozen.height = img.naturalHeight || 461;
+          frozen.style.cssText = 'display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:8px';
+          frozen.setAttribute('role', 'img');
+          frozen.setAttribute('aria-label', `示範 ${index + 1} 已暫停的畫面`);
+          if (img.complete && img.naturalWidth) {
+            frozen.getContext('2d').drawImage(img, 0, 0);
+            img.after(frozen);
+            img.style.display = 'none';
+          } else {
+            img.src = img.dataset.still;
+          }
+        } else {
+          frozen?.remove();
+          img.style.display = '';
+          img.src = animation;
+        }
+        playing = !playing;
+        update();
+      });
+    });
+  </script>
+</body>
+</html>
